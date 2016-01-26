@@ -1,2 +1,2 @@
-# DailyNotes
-My notes for recording daily knowledge learnt.
+# Daily Notes
+Notes for keeping daily knowledge learnt.
