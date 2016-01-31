@@ -48,22 +48,22 @@
 \input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
 
 \begin{document}
-
-%----------------------------------------------------------------------------------------
-%	TITLE PAGE
-%----------------------------------------------------------------------------------------
-
-\begingroup
-\thispagestyle{empty}
-\begin{tikzpicture}[remember picture,overlay]
-\coordinate [below=12cm] (midpoint) at (current page.north);
-\node at (current page.north west)
-{\begin{tikzpicture}[remember picture,overlay]
-\node[anchor=north west,inner sep=0pt] at (0,0) {\includegraphics[width=\paperwidth]{background}}; % Background image
-\draw[anchor=north] (midpoint) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]{\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}{\centering The Search for a Title\\[15pt] % Book title
-{\Large A Profound Subtitle}\\[20pt] % Subtitle
-{\huge Dr. John Smith}}}; % Author name
-\end{tikzpicture}};
+	
+	%----------------------------------------------------------------------------------------
+	%	TITLE PAGE
+	%----------------------------------------------------------------------------------------
+	
+	\begingroup
+	\thispagestyle{empty}
+	\begin{tikzpicture}[remember picture,overlay]
+	\coordinate [below=12cm] (midpoint) at (current page.north);
+	\node at (current page.north west)
+	{\begin{tikzpicture}[remember picture,overlay]
+		\node[anchor=north west,inner sep=0pt] at (0,0) {\includegraphics[width=\paperwidth]{background}}; % Background image
+		\draw[anchor=north] (midpoint) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]{\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}{\centering The Search for a Title\\[15pt] % Book title
+				{\Large A Profound Subtitle}\\[20pt] % Subtitle
+				{\huge Dr. John Smith}}}; % Author name
+		\end{tikzpicture}};
 \end{tikzpicture}
 \vfill
 \endgroup
@@ -133,25 +133,25 @@ Lists are useful to present information in a concise and/or ordered way\footnote
 \subsection{Numbered List}\index{Lists!Numbered List}
 
 \begin{enumerate}
-\item The first item
-\item The second item
-\item The third item
+	\item The first item
+	\item The second item
+	\item The third item
 \end{enumerate}
 
 \subsection{Bullet Points}\index{Lists!Bullet Points}
 
 \begin{itemize}
-\item The first item
-\item The second item
-\item The third item
+	\item The first item
+	\item The second item
+	\item The third item
 \end{itemize}
 
 \subsection{Descriptions and Definitions}\index{Lists!Descriptions and Definitions}
 
 \begin{description}
-\item[Name] Description
-\item[Word] Definition
-\item[Comment] Elaboration
+	\item[Name] Description
+	\item[Word] Definition
+	\item[Comment] Elaboration
 \end{description}
 
 %----------------------------------------------------------------------------------------
@@ -168,18 +168,18 @@ This is an example of theorems.
 This is a theorem consisting of several equations.
 
 \begin{theorem}[Name of the theorem]
-In $E=\mathbb{R}^n$ all norms are equivalent. It has the properties:
-\begin{align}
-& \big| ||\mathbf{x}|| - ||\mathbf{y}|| \big|\leq || \mathbf{x}- \mathbf{y}||\\
-&  ||\sum_{i=1}^n\mathbf{x}_i||\leq \sum_{i=1}^n||\mathbf{x}_i||\quad\text{where $n$ is a finite integer}
-\end{align}
+	In $E=\mathbb{R}^n$ all norms are equivalent. It has the properties:
+	\begin{align}
+		& \big| ||\mathbf{x}|| - ||\mathbf{y}|| \big|\leq || \mathbf{x}- \mathbf{y}||\\
+		&  ||\sum_{i=1}^n\mathbf{x}_i||\leq \sum_{i=1}^n||\mathbf{x}_i||\quad\text{where $n$ is a finite integer}
+	\end{align}
 \end{theorem}
 
 \subsection{Single Line}\index{Theorems!Single Line}
 This is a theorem consisting of just one line.
 
 \begin{theorem}
-A set $\mathcal{D}(G)$ in dense in $L^2(G)$, $|\cdot|_0$. 
+	A set $\mathcal{D}(G)$ in dense in $L^2(G)$, $|\cdot|_0$. 
 \end{theorem}
 
 %------------------------------------------------
@@ -189,12 +189,12 @@ A set $\mathcal{D}(G)$ in dense in $L^2(G)$, $|\cdot|_0$.
 This is an example of a definition. A definition could be mathematical or it could define a concept.
 
 \begin{definition}[Definition name]
-Given a vector space $E$, a norm on $E$ is an application, denoted $||\cdot||$, $E$ in $\mathbb{R}^+=[0,+\infty[$ such that:
-\begin{align}
-& ||\mathbf{x}||=0\ \Rightarrow\ \mathbf{x}=\mathbf{0}\\
-& ||\lambda \mathbf{x}||=|\lambda|\cdot ||\mathbf{x}||\\
-& ||\mathbf{x}+\mathbf{y}||\leq ||\mathbf{x}||+||\mathbf{y}||
-\end{align}
+	Given a vector space $E$, a norm on $E$ is an application, denoted $||\cdot||$, $E$ in $\mathbb{R}^+=[0,+\infty[$ such that:
+	\begin{align}
+		& ||\mathbf{x}||=0\ \Rightarrow\ \mathbf{x}=\mathbf{0}\\
+		& ||\lambda \mathbf{x}||=|\lambda|\cdot ||\mathbf{x}||\\
+		& ||\mathbf{x}+\mathbf{y}||\leq ||\mathbf{x}||+||\mathbf{y}||
+	\end{align}
 \end{definition}
 
 %------------------------------------------------
@@ -202,12 +202,12 @@ Given a vector space $E$, a norm on $E$ is an application, denoted $||\cdot||$, 
 \section{Notations}\index{Notations}
 
 \begin{notation}
-Given an open subset $G$ of $\mathbb{R}^n$, the set of functions $\varphi$ are:
-\begin{enumerate}
-\item Bounded support $G$;
-\item Infinitely differentiable;
-\end{enumerate}
-a vector space is denoted by $\mathcal{D}(G)$. 
+	Given an open subset $G$ of $\mathbb{R}^n$, the set of functions $\varphi$ are:
+	\begin{enumerate}
+		\item Bounded support $G$;
+		\item Infinitely differentiable;
+	\end{enumerate}
+	a vector space is denoted by $\mathcal{D}(G)$. 
 \end{notation}
 
 %------------------------------------------------
@@ -217,7 +217,7 @@ a vector space is denoted by $\mathcal{D}(G)$.
 This is an example of a remark.
 
 \begin{remark}
-The concepts presented here are now in conventional employment in mathematics. Vector spaces are taken over the field $\mathbb{K}=\mathbb{R}$, however, established properties are easily extended to $\mathbb{K}=\mathbb{C}$.
+	The concepts presented here are now in conventional employment in mathematics. Vector spaces are taken over the field $\mathbb{K}=\mathbb{R}$, however, established properties are easily extended to $\mathbb{K}=\mathbb{C}$.
 \end{remark}
 
 %------------------------------------------------
@@ -227,7 +227,7 @@ The concepts presented here are now in conventional employment in mathematics. V
 This is an example of a corollary.
 
 \begin{corollary}[Corollary name]
-The concepts presented here are now in conventional employment in mathematics. Vector spaces are taken over the field $\mathbb{K}=\mathbb{R}$, however, established properties are easily extended to $\mathbb{K}=\mathbb{C}$.
+	The concepts presented here are now in conventional employment in mathematics. Vector spaces are taken over the field $\mathbb{K}=\mathbb{R}$, however, established properties are easily extended to $\mathbb{K}=\mathbb{C}$.
 \end{corollary}
 
 %------------------------------------------------
@@ -239,17 +239,17 @@ This is an example of propositions.
 \subsection{Several equations}\index{Propositions!Several Equations}
 
 \begin{proposition}[Proposition name]
-It has the properties:
-\begin{align}
-& \big| ||\mathbf{x}|| - ||\mathbf{y}|| \big|\leq || \mathbf{x}- \mathbf{y}||\\
-&  ||\sum_{i=1}^n\mathbf{x}_i||\leq \sum_{i=1}^n||\mathbf{x}_i||\quad\text{where $n$ is a finite integer}
-\end{align}
+	It has the properties:
+	\begin{align}
+		& \big| ||\mathbf{x}|| - ||\mathbf{y}|| \big|\leq || \mathbf{x}- \mathbf{y}||\\
+		&  ||\sum_{i=1}^n\mathbf{x}_i||\leq \sum_{i=1}^n||\mathbf{x}_i||\quad\text{where $n$ is a finite integer}
+	\end{align}
 \end{proposition}
 
 \subsection{Single Line}\index{Propositions!Single Line}
 
 \begin{proposition} 
-Let $f,g\in L^2(G)$; if $\forall \varphi\in\mathcal{D}(G)$, $(f,\varphi)_0=(g,\varphi)_0$ then $f = g$. 
+	Let $f,g\in L^2(G)$; if $\forall \varphi\in\mathcal{D}(G)$, $(f,\varphi)_0=(g,\varphi)_0$ then $f = g$. 
 \end{proposition}
 
 %------------------------------------------------
@@ -261,18 +261,18 @@ This is an example of examples.
 \subsection{Equation and Text}\index{Examples!Equation and Text}
 
 \begin{example}
-Let $G=\{x\in\mathbb{R}^2:|x|<3\}$ and denoted by: $x^0=(1,1)$; consider the function:
-\begin{equation}
-f(x)=\left\{\begin{aligned} & \mathrm{e}^{|x|} & & \text{si $|x-x^0|\leq 1/2$}\\
-& 0 & & \text{si $|x-x^0|> 1/2$}\end{aligned}\right.
-\end{equation}
-The function $f$ has bounded support, we can take $A=\{x\in\mathbb{R}^2:|x-x^0|\leq 1/2+\epsilon\}$ for all $\epsilon\in\intoo{0}{5/2-\sqrt{2}}$.
+	Let $G=\{x\in\mathbb{R}^2:|x|<3\}$ and denoted by: $x^0=(1,1)$; consider the function:
+	\begin{equation}
+	f(x)=\left\{\begin{aligned} & \mathrm{e}^{|x|} & & \text{si $|x-x^0|\leq 1/2$}\\
+	& 0 & & \text{si $|x-x^0|> 1/2$}\end{aligned}\right.
+	\end{equation}
+	The function $f$ has bounded support, we can take $A=\{x\in\mathbb{R}^2:|x-x^0|\leq 1/2+\epsilon\}$ for all $\epsilon\in\intoo{0}{5/2-\sqrt{2}}$.
 \end{example}
 
 \subsection{Paragraph of Text}\index{Examples!Paragraph of Text}
 
 \begin{example}[Example name]
-\lipsum[2]
+	\lipsum[2]
 \end{example}
 
 %------------------------------------------------
@@ -282,7 +282,7 @@ The function $f$ has bounded support, we can take $A=\{x\in\mathbb{R}^2:|x-x^0|\
 This is an example of an exercise.
 
 \begin{exercise}
-This is a good place to ask a question to test learning progress or further cement ideas into students' minds.
+	This is a good place to ask a question to test learning progress or further cement ideas into students' minds.
 \end{exercise}
 
 %------------------------------------------------
@@ -290,7 +290,7 @@ This is a good place to ask a question to test learning progress or further ceme
 \section{Problems}\index{Problems}
 
 \begin{problem}
-What is the average airspeed velocity of an unladen swallow?
+	What is the average airspeed velocity of an unladen swallow?
 \end{problem}
 
 %------------------------------------------------
@@ -300,7 +300,7 @@ What is the average airspeed velocity of an unladen swallow?
 Define a word to improve a students' vocabulary.
 
 \begin{vocabulary}[Word]
-Definition of word.
+	Definition of word.
 \end{vocabulary}
 
 %----------------------------------------------------------------------------------------
@@ -320,17 +320,17 @@ Definition of word.
 \section{Table}\index{Table}
 
 \begin{table}[h]
-\centering
-\begin{tabular}{l l l}
-\toprule
-\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
-\midrule
-Treatment 1 & 0.0003262 & 0.562 \\
-Treatment 2 & 0.0015681 & 0.910 \\
-Treatment 3 & 0.0009271 & 0.296 \\
-\bottomrule
-\end{tabular}
-\caption{Table caption}
+	\centering
+	\begin{tabular}{l l l}
+		\toprule
+		\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
+		\midrule
+		Treatment 1 & 0.0003262 & 0.562 \\
+		Treatment 2 & 0.0015681 & 0.910 \\
+		Treatment 3 & 0.0009271 & 0.296 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Table caption}
 \end{table}
 
 %------------------------------------------------
@@ -338,8 +338,8 @@ Treatment 3 & 0.0009271 & 0.296 \\
 \section{Figure}\index{Figure}
 
 \begin{figure}[h]
-\centering\includegraphics[scale=0.5]{placeholder}
-\caption{Figure caption}
+	\centering\includegraphics[scale=0.5]{placeholder}
+	\caption{Figure caption}
 \end{figure}
 
 %----------------------------------------------------------------------------------------
