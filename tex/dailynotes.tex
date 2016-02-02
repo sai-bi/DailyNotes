@@ -1,46 +1,3 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% The Legrand Orange Book
-% LaTeX Template
-% Version 2.1 (14/11/15)
-%
-% This template has been downloaded from:
-% http://www.LaTeXTemplates.com
-%
-% Mathias Legrand (legrand.mathias@gmail.com) with modifications by:
-% Vel (vel@latextemplates.com)
-%
-% License:
-% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
-%
-% Compiling this template:
-% This template uses biber for its bibliography and makeindex for its index.
-% When you first open the template, compile it from the command line with the 
-% commands below to make sure your LaTeX distribution is configured correctly:
-%
-% 1) pdflatex main
-% 2) makeindex main.idx -s StyleInd.ist
-% 3) biber main
-% 4) pdflatex main x 2
-%
-% After this, when you wish to update the bibliography/index use the appropriate
-% command above and make sure to compile with pdflatex several times 
-% afterwards to propagate your changes to the document.
-%
-% This template also uses a number of packages which may need to be
-% updated to the newest versions for the template to compile. It is strongly
-% recommended you update your LaTeX distribution if you have any
-% compilation errors.
-%
-% Important note:
-% Chapter heading images should have a 2:1 width:height ratio,
-% e.g. 920px width and 460px height.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%----------------------------------------------------------------------------------------
-%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
-%----------------------------------------------------------------------------------------
-
 \documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
 
 %----------------------------------------------------------------------------------------
@@ -94,7 +51,7 @@
 
 \pagestyle{empty} % No headers
 
-\tableofcontents % Print the table of contents itself
+% \tableofcontents % Print the table of contents itself
 
 \cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
 
@@ -112,9 +69,32 @@
 
 \chapterimage{chapter_head_2.pdf} % Chapter heading image
 
-\chapter{Text Chapter}
+\chapter{February}
 
-\section{Paragraphs of Text}\index{Paragraphs of Text}
+\section{Feb 1st}\index{Feb 1st}
+\subsection{Standard deviation}
+\textbf{Standard deviation} $\sigma$ is defined as the square root of \textbf{variance}. That is,
+\begin{align}
+	\sigma(X) &= \sqrt{var(X)}
+\end{align}
+The definition for variance:
+\begin{align}
+var(X) = E[(X - \mu_X)^2]
+\end{align}
+The definition for \textbf{covariance}:
+\begin{align}
+cov(X,Y) = E[(X - \mu_X)(Y- \mu_Y)]
+\end{align}
+A property:
+\begin{align}
+	cov(X,X) = var(X) = \sigma(X)^2 
+\end{align}
+
+
+
+
+
+
 
 
 
