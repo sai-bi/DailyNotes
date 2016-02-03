@@ -1,0 +1,39 @@
+\chapter{February}
+
+\section{Feb 1st}\index{Feb 1st}
+\subsection{Standard deviation}
+\textbf{Standard deviation} $\sigma$ is defined as the square root of \textbf{variance}. That is,
+\begin{align}
+	\sigma(X) &= \sqrt{var(X)}
+\end{align}
+The definition for variance:
+\begin{align}
+var(X) = E[(X - \mu_X)^2]
+\end{align}
+The definition for \textbf{covariance}:
+\begin{align}
+cov(X,Y) = E[(X - \mu_X)(Y- \mu_Y)]
+\end{align}
+A property:
+\begin{align}
+	cov(X,X) = var(X) = \sigma(X)^2 
+\end{align}
+Definition for \textbf{correlation}:
+\begin{align}
+	\begin{split}
+	\rho(X,Y) & = corr(X, Y) 		\\
+			  & = \frac{cov(X,Y)}{\sigma_X \sigma_Y}
+	\end{split}
+\end{align}
+
+\section{Feb 2nd}\index{Feb 2nd}
+
+\subsection{Determinant}
+Today when I try to compute the determinant of the covariance matrix in the multivariate Gaussian, I come across the problem of overflow. In fact, I only
+need to know the logarithm of the determinant. Therefore, I apply the following solution:
+\begin{align}
+	\begin{split}
+	\log(\det A) &= \log(\Pi_{i=1}^{N} \lambda_i)  \\
+				 & = \sum_{i=1}^{N} \log(\lambda_i)
+	\end{split}
+\end{align}

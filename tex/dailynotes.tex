@@ -1,15 +1,8 @@
-\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+\documentclass[11pt,fleqn]{book}
 
-%----------------------------------------------------------------------------------------
-
-\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+\input{structure} 
 
 \begin{document}
-	
-	%----------------------------------------------------------------------------------------
-	%	TITLE PAGE
-	%----------------------------------------------------------------------------------------
-	
 	\begingroup
 	\thispagestyle{empty}
 	\begin{tikzpicture}[remember picture,overlay]
@@ -25,70 +18,29 @@
 \vfill
 \endgroup
 
-%----------------------------------------------------------------------------------------
-%	COPYRIGHT PAGE
-%----------------------------------------------------------------------------------------
-
 \newpage
 ~\vfill
 \thispagestyle{empty}
 
-\noindent Copyright \copyright\ 2016  Sai Bi\\ % Copyright notice
-
-%\noindent \textsc{Published by Publisher}\\ % Publisher
-
-%\noindent \textsc{book-website.com}\\ % URL
+\noindent Copyright \copyright\ 2016  Sai Bi\\ 
 
 \noindent Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.\\ % License information
 
 \noindent \textit{Start from January 2016} % Printing/edition date
 
-%----------------------------------------------------------------------------------------
-%	TABLE OF CONTENTS
-%----------------------------------------------------------------------------------------
+\chapterimage{chapter_head_1.pdf} 
 
-\chapterimage{chapter_head_1.pdf} % Table of contents heading image
+\pagestyle{empty} 
+\cleardoublepage
+\pagestyle{fancy}
 
-\pagestyle{empty} % No headers
-
-% \tableofcontents % Print the table of contents itself
-
-\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
-
-\pagestyle{fancy} % Print headers again
-
-%----------------------------------------------------------------------------------------
-%	PART
-%----------------------------------------------------------------------------------------
 
 \part{Year 2016}
 
-%----------------------------------------------------------------------------------------
-%	CHAPTER 1
-%----------------------------------------------------------------------------------------
 
-\chapterimage{chapter_head_2.pdf} % Chapter heading image
+\chapterimage{chapter_head_2.pdf}
 
-\chapter{February}
-
-\section{Feb 1st}\index{Feb 1st}
-\subsection{Standard deviation}
-\textbf{Standard deviation} $\sigma$ is defined as the square root of \textbf{variance}. That is,
-\begin{align}
-	\sigma(X) &= \sqrt{var(X)}
-\end{align}
-The definition for variance:
-\begin{align}
-var(X) = E[(X - \mu_X)^2]
-\end{align}
-The definition for \textbf{covariance}:
-\begin{align}
-cov(X,Y) = E[(X - \mu_X)(Y- \mu_Y)]
-\end{align}
-A property:
-\begin{align}
-	cov(X,X) = var(X) = \sigma(X)^2 
-\end{align}
+\input{feb.tex}
 
 
 
@@ -98,29 +50,5 @@ A property:
 
 
 
-%----------------------------------------------------------------------------------------
-%	BIBLIOGRAPHY
-%----------------------------------------------------------------------------------------
-
-\chapter*{Bibliography}
-\addcontentsline{toc}{chapter}{\textcolor{ocre}{Bibliography}}
-\section*{Books}
-\addcontentsline{toc}{section}{Books}
-\printbibliography[heading=bibempty,type=book]
-\section*{Articles}
-\addcontentsline{toc}{section}{Articles}
-\printbibliography[heading=bibempty,type=article]
-
-%----------------------------------------------------------------------------------------
-%	INDEX
-%----------------------------------------------------------------------------------------
-
-\cleardoublepage
-\phantomsection
-\setlength{\columnsep}{0.75cm}
-\addcontentsline{toc}{chapter}{\textcolor{ocre}{Index}}
-\printindex
-
-%----------------------------------------------------------------------------------------
 
 \end{document}
