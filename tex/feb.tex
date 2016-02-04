@@ -79,4 +79,89 @@ plt.savefig('3.png', dpi = 100)
 plt.show()
 \end{minted}
 
+\section{Feb 2nd}\index{Feb 2nd}
+\subsection{Different types of machine learning methods:}
+\begin{enumerate}
+\item \textbf{Parametric methods}: a family of distributions that can be described using a finite 
+number of paramters, such as \textit{GMM, Naive Bayes, SVM}.
+\item \textbf{Non-parametric methods}: methods that are not based on parametrized families of
+probability distributions, such as \textit{decision trees, KNN}. 
+\end{enumerate}
+
+The difference between parametric models and non-parametric models is that the former 
+has a fixed number of parameters, while the latter grows the number of parameters with 
+the amount of training data.
+\begin{remark}
+Note that the non-parametric model does not have no parameters: parameters are determined by the training data, not the model.
+\end{remark}
+
+Parametric models can also be categorized into \textbf{generative models} and 
+\textbf{discriminative models}.
+\begin{enumerate}
+\item Generative models: Fit a probability distribution like a multivariate Gaussian to each class.
+\item Approximate the boundaries between classes by simple functions.
+\end{enumerate}
+
+\subsection{Representation Learning}
+
+
+\paragraph{Dimensionality Reduction and Denoising}
+Given data in high-dimensional Euclidean space, project to a
+low-dimensional linear subspace while retaining as much of the
+signal as possible. 
+
+\paragraph{Embedding and manifold learning}
+Given data that lie in a non-Euclidean space, find an embedding into
+Euclidean space that preserves as much of the geometry as possible.
+
+\paragraph{Metric learning}
+A metric $d$ should satisfy the following properties:
+\begin{enumerate}
+	\item $d(x, y) \geq 0$, non-negativity
+	\item $d(x, y) = 0$ if and only if $x = y$
+	\item $d(x, y) = d(y, x)$, symmetry
+	\item $d(x, z) \leq d(x, y) + d(y, z)$, triangle inequality
+\end{enumerate}
+
+\subsection{Fast Nearest Neighbor Search}
+\textbf{Locality sensitive hashing.}\hspace{0.2cm} Grouping points in space into \textit{buckets} based on some distance metric operating on the points. Points that are close to each other under the chosen metric are mapped to the same bucket with high probability.
+
+\textbf{K-d tress.}\hspace{0.2cm} A space-partitioning data structure for organizing points in a k-dimensional space.
+
+\begin{remark}
+	Nearest neighbor is sensitive to noise.
+\end{remark}
+
+\subsection{Decision Trees}
+\textbf{Node split.}\hspace{0.2cm} When to split a node, we need to decide which 
+node to split. We have the following methods to measure the \textbf{uncertainty in prediction} $u(S)$:
+\begin{itemize}
+	\item \textit{Misclassification rate}: $min(p, 1-p)$, where $p$ is the fraction of positive points.
+	\item \textit{Gini index}: $2p(1-p)$
+	\item \textit{Entropy}: $-p\log p - (1-p)\log(1-p)$
+\end{itemize}
+We select the node split that can mostly reduce uncertainty (see Figure~\ref{fig:feb-dt-split}).
+\begin{figure}[h]
+	\centering{
+		\includegraphics[width = 0.9\textwidth]{./images/feb/dt_split.PNG}
+	}
+	\label{fig:feb-dt-split}
+	\caption{Benefit of a split.}
+\end{figure} 
+
+
+\textbf{When to stop?}\hspace{0.2cm} Keep splitting until leaves are pure. 
+
+\textbf{Pruning.}\hspace{0.2cm} After split stops, we do pruning to avoid over-fitting. Consider all pairs of leave nodes,
+any pair whose elimination yields a satisfactory (small)
+increase in impurity is eliminated, and the common
+antecedent node is declared as leaf node.
+
+
+
+
+
+
+
+
 
