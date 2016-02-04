@@ -157,6 +157,63 @@ any pair whose elimination yields a satisfactory (small)
 increase in impurity is eliminated, and the common
 antecedent node is declared as leaf node.
 
+\subsection{Classification with generative models}
+
+\textbf{Bayes-optimal prediction.}\hspace{0.2cm}
+\begin{align}
+	\begin{split}
+	Pr(y= j | x) &= \frac{Pr(y= j) Pr(x|y=j)}{Pr(x)} \\
+		&= \frac{\pi_j P_j(x)}{\sum_{i=1}^{k} \pi_i P_i(x)}
+	\end{split}
+\end{align}
+
+
+\textbf{Laplace smoothing.}\hspace{0.2cm}
+We want to estimate $p_{ji} = Pr(x_i = 1 | y=j)$. Then the maximum likelihood estimate of $p_{ji}$ is $p_{ij} = \frac{n_{ji}}{n_j}$, where $n_{ji}$ is the number of instances of class $j$ with $x_i = 1$, and $n_j$ is the number of 
+instances of class $j$. 
+\begin{remark}
+This causes the problem if $n_{ji} = 0$. Instead, we use \textit{Laplace smoothing}: $p_{ji} = \frac{n_{ji} + 1}{n_j + 2}$
+\end{remark} 
+
+
+\textbf{Multinomial naive Bayes.}\hspace{0.2cm}
+Classify document $x$ as $\argmax_j \pi_j \prod_{i=1}^{N} p_{ji} ^ {x_i}$.
+To improve the performance, we may adopt the following heuristics:
+\begin{itemize}
+	\item Compensating for burstiness. Problem: once a word has appeared in a document, it has a much higher chance of appearing again.
+	Solution: Instead of the number of occurrences $f$ of a word, use
+	$\log(1 + f )$.
+	
+	\item Downweighting common words. Problem: common words can have a unduly large influence on classification. Solution: weight each word $w$ by \textit{inverse document frequency}:
+	\[
+		\log\frac{\# docs}{\#(docs containing w)}
+	\]
+\end{itemize}
+
+\subsection{Gaussian}
+\textbf{Multivariate Gaussian.}\hspace{0.2cm} mean: $\mu \in R^p$. covariance $p\times p$
+matrix $\sum$:
+\begin{align}
+\begin{split}
+	p(x) &= \frac{1}{(2\pi)^{p/2} |\sum|^{1/2}} \exp(-\frac{1}{2} (x-\mu)^T \sum {}^{-1} (x-\mu))
+\end{split}
+\end{align}
+
+\textbf{Spherical Gaussian.}\hspace{0.2cm} $\sum = diag(\sigma^2, ..., \sigma^2)$
+
+\textbf{Diagonal Gaussian.}\hspace{0.2cm} $\sum = diag(\sigma_1^2, ..., \sigma_p^2)$
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
