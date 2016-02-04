@@ -186,7 +186,7 @@ To improve the performance, we may adopt the following heuristics:
 	
 	\item Downweighting common words. Problem: common words can have a unduly large influence on classification. Solution: weight each word $w$ by \textit{inverse document frequency}:
 	\[
-		\log\frac{\# docs}{\#(docs containing w)}
+		\log\frac{\# \text{docs}}{\#(\text{docs containing w})}
 	\]
 \end{itemize}
 
