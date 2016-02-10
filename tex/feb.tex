@@ -199,9 +199,124 @@ matrix $\sum$:
 \end{split}
 \end{align}
 
+
 \textbf{Spherical Gaussian.}\hspace{0.2cm} $\sum = diag(\sigma^2, ..., \sigma^2)$
 
+Here we call it \textit{spherical Gaussian} because the contour of points with equal density is a sphere:
+\begin{align}
+\begin{split}
+||x - \mu||^2 &= r^2
+\end{split}
+\end{align}
+
+\begin{figure}[h]
+\centering{
+	\includegraphics{./images/feb/sg.PNG}
+}
+\caption{The contour means that points on it have the same density. For spherical Gaussians, density at a point only depends on its distance from $\mu$.}
+\end{figure}
+
+
+
+
+
 \textbf{Diagonal Gaussian.}\hspace{0.2cm} $\sum = diag(\sigma_1^2, ..., \sigma_p^2)$
+
+\begin{figure}[h]
+	\centering{
+		\includegraphics[width=0.9\textwidth]{./images/feb/dg.PNG}
+	}
+	\caption{Diagonal Gaussian: the contours are axis-aligned ellipsoids.}
+\end{figure}
+
+\myheader{General Gaussian .}
+
+\begin{figure}[h]
+	\centering{
+		\includegraphics[width=0.9\textwidth]{./images/feb/gg.PNG}
+	}
+	\caption{General Gaussian: the contours are ellipsoids, with axis being the eigen-vectors
+		of covariance matrix $\sum$.}
+\end{figure}
+
+\myheader{Binary classifications with Gaussians}
+Suppose we have two Gaussians:
+\begin{align}
+\begin{split}
+	P_1 &= N(\mu_1, \sum{}_1) \\
+	P_2 &= N(\mu_2, \sum{}_2)
+\end{split}
+\end{align}
+
+The classification boundary is:
+\begin{align}
+\begin{split}
+	x^T M x + 2w^Tx & \geq \theta	\\
+	\text{where } M & = \frac{1}{2}(\sum{}_2^{-1} - \sum{}_{1}^{-1}) \\
+				w & = \sum{}_1^{-1} \mu_1 - \sum{}_{2}^{-1}\mu_2
+\end{split}
+\end{align}
+\begin{remark}
+	From this we know that, when $\sum_1 = \sum_2$, it has a linear decision boundary. Otherwise, it has quadratic boundary.
+\end{remark}
+
+\begin{remark}
+	When calculate the inverse of covariance matrix $\sum$, to avoid the problem that $\sum$ 
+	is singular, we need to regularize it: $\sum = \sum + \sigma^2 I$.
+\end{remark}
+
+
+\section{Feb 9th}
+\subsection{New commands in LaTex}
+\begin{minted}[frame=lines, framesep=2mm,]
+{cpp}
+\newcommand{\plusbinomial}[3][2]{(#2 + #3)^#1}
+
+To save some time when writing too many expressions 
+with exponents is by defining a new command to make simpler:
+
+\[ \plusbinomial{x}{y} \] -> $(x+y)^2$
+
+And even the exponent can be changed
+
+\[ \plusbinomial[4]{y}{y} \] -> $(y+y)^4$
+
+\plusbinomial
+This is the name of the new command.
+[3]
+The number of parameters the command will take, in this case 3.
+
+[2]
+Is the default value for the first parameter. This is what makes the first
+ parameter optional, if not passed it will use this default value.
+
+(#2 + #3)^#1
+This is what the command does. In this case it will put the second and third
+parameters in a "binomial format" to the power represented by the first
+parameter.
+\end{minted}
+
+
+\subsection{OpenGL}
+\myheader{Uniform .} 
+A uniform is a global GLSL variable declared with the "uniform" storage qualifier. These act as parameters that the user of a shader program can pass to that program. They are stored in a program object. 
+
+Uniforms are so named because they do not change from one execution of a shader program to the next within a particular rendering call. This makes them unlike shader stage inputs and outputs, which are often different for each invocation of a program stage.
+
+
+\subsection{Fisher's Linear Discriminant}
+\myheader{What is Fisher LDA ?} Fisher LAD is a framework for linear classification without Gaussian assumptions. It is a linear classifier projects all data onto a direction $w$.
+
+\begin{figure}[h]
+	\centering{
+		\includegraphics[width=0.45\textwidth]{./images/feb/LDA_1.PNG}
+		\includegraphics[width=0.45\textwidth]{./images/feb/LDA_2.PNG}	
+	}
+	\caption{Fisher LDA.}
+\end{figure}
+
+
+
 
 
 
