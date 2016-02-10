@@ -315,9 +315,38 @@ Uniforms are so named because they do not change from one execution of a shader 
 	\caption{Fisher LDA.}
 \end{figure}
 
+\subsection{Logistic Regression}
+\myheader{Why Logistic Regression ?} See Figure~\ref{fig:logistic}.
+\begin{figure}[t]
+	\centering{
+		\includegraphics[width=0.45\textwidth]{./images/feb/logistic.PNG}
+		\includegraphics[width=0.45\textwidth]{./images/feb/logistic_1.PNG}	
+	}
+	\caption{Logistic regression.}
+	\label{fig:logistic}
+\end{figure}
+
+\myheader{How to optimize $L(w)$ ?}
+\begin{itemize}
+\item \myheader{Gradient descent .} Gradient descent is a first-order optimization algorithm. To find a local minimum of a function using gradient descent, one takes steps proportional to the \textbf{negative} of the gradient (or of the approximate gradient) of the function at the current point. If instead one takes steps proportional to the positive of the gradient, one approaches a local maximum of that function; the procedure is then known as gradient ascent.
+
+\item \myheader{Newton's method .} Newton's method is a method for finding successively better approximations to the roots (or zeroes) of a real-valued function: $f(x) = 0$. If the function satisfies the assumptions made in the derivation of the formula and the initial guess is close, then a better approximation $x_1$ is: $x_1 = x_0 - \frac{f(x_0)}{f'(x_0)}$.
+
+To apply Newton's method for minimization and maximization problem, considering the fact that the derivative is zero at a minimum or maximum, so minima and maxima can be found by applying Newton's method to the derivative. The iteration becomes:
+\[
+x_{n+1} = x_n - \frac{f'(x_n)}{f''(x_n)}
+\]
+\end{itemize}
+
+\myheader{How to determine step size ?} A method like Newton's method chooses a step, but the validity of that step only goes as far as the Newton quadratic model for the function really reflects the function. The idea of a line search is to use the direction of the chosen step, but to control the length, by solving a one-dimensional problem of minimizing
+\[
+\phi(\alpha) = f(\alpha p_k + x_k)
+\]
+where $p_k$ is is the search direction chosen from the position $x_k$.
 
 
 
+ 
 
 
 
