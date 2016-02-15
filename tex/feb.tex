@@ -322,6 +322,27 @@ the shortest access time to the GPU so they are definitely recommended.
 \myheader{Rasterizer .} Rasterizer maps coordinates to screen space. And finally it draws the
 primitives according to the topology which is specified in the draw call.
 
+\mycode{C++}{
+	Vector3f Vertices[1];
+	Vertices[0] = Vector3f(0.0f, 0.0f, 0.0f);
+	GLuint VBO;
+	glGenBuffers(1, & VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+}
+
+\myheader{glGen* .} 
+OpenGL defines serveral \textit{glGen*} functions for generating objects of various
+types. They take two parameters:
+\begin{itemize}
+	\item First parameter: the number of objects you want to create
+	\item Second parameter: the address of an array of GLuints to store the handles that the driver
+	allocates for you (make sure the array is large enough to handle your request). Future calls to this function will not generate the same object handles unless you delete them first with glDeleteBuffers.
+\end{itemize} 
+
+\myheader{glBindBuffer .} 
+
 
 
 
