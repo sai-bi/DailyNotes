@@ -1,7 +1,6 @@
 \chapter{February}
 
-\section{Feb 1st}\index{Feb 1st}
-\subsection{Standard deviation} \index{Standard deviation}
+\section{Standard deviation} \index{Standard deviation}
 \textbf{Standard deviation} $\sigma$ is defined as the square root of \textbf{variance}. That is,
 \begin{align}
 	\sigma(X) &= \sqrt{var(X)}
@@ -26,9 +25,8 @@ Definition for \textbf{correlation}:
 	\end{split}
 \end{align}
 
-\section{Feb 2nd}\index{Feb 2nd}
 
-\subsection{Determinant}\index{Determinant}
+\section{Determinant}\index{Determinant}
 Today when I try to compute the determinant of the covariance matrix in the multivariate Gaussian, I come across the problem of overflow. In fact, I only
 need to know the logarithm of the determinant. Therefore, I apply the following solution:
 \begin{align}
@@ -38,7 +36,7 @@ need to know the logarithm of the determinant. Therefore, I apply the following 
 	\end{split}
 \end{align}
 
-\subsection{Matplotlib}\index{Matplotlib}
+\section{Matplotlib}\index{Matplotlib}
 Sample code to plot figures with Python:
 
 \begin{minted}[frame=lines, framesep=2mm,]
@@ -79,8 +77,7 @@ plt.savefig('3.png', dpi = 100)
 plt.show()
 \end{minted}
 
-\section{Feb 3rd}\index{Feb 2nd}
-\subsection{Different types of machine learning methods:}
+\section{Different types of machine learning methods:}
 \begin{enumerate}
 \item \textbf{Parametric methods}: a family of distributions that can be described using a finite 
 number of paramters, such as \textit{GMM, Naive Bayes, SVM}.
@@ -102,7 +99,7 @@ Parametric models can also be categorized into \textbf{generative models} and
 \item Approximate the boundaries between classes by simple functions.
 \end{enumerate}
 
-\subsection{Representation Learning}
+\section{Representation Learning}
 
 
 \paragraph{Dimensionality Reduction and Denoising}
@@ -123,7 +120,7 @@ A metric $d$ should satisfy the following properties:
 	\item $d(x, z) \leq d(x, y) + d(y, z)$, triangle inequality
 \end{enumerate}
 
-\subsection{Fast Nearest Neighbor Search}
+\section{Fast Nearest Neighbor Search}
 \textbf{Locality sensitive hashing.}\hspace{0.2cm} Grouping points in space into \textit{buckets} based on some distance metric operating on the points. Points that are close to each other under the chosen metric are mapped to the same bucket with high probability.
 
 \textbf{K-d tress.}\hspace{0.2cm} A space-partitioning data structure for organizing points in a k-dimensional space.
@@ -132,7 +129,7 @@ A metric $d$ should satisfy the following properties:
 	Nearest neighbor is sensitive to noise.
 \end{remark}
 
-\subsection{Decision Trees}
+\section{Decision Trees}
 \textbf{Node split.}\hspace{0.2cm} When to split a node, we need to decide which 
 node to split. We have the following methods to measure the \textbf{uncertainty in prediction} $u(S)$:
 \begin{itemize}
@@ -157,7 +154,7 @@ any pair whose elimination yields a satisfactory (small)
 increase in impurity is eliminated, and the common
 antecedent node is declared as leaf node.
 
-\subsection{Classification with generative models}
+\section{Classification with generative models}
 
 \textbf{Bayes-optimal prediction.}\hspace{0.2cm}
 \begin{align}
@@ -190,7 +187,7 @@ To improve the performance, we may adopt the following heuristics:
 	\]
 \end{itemize}
 
-\subsection{Gaussian}
+\section{Gaussian}
 \textbf{Multivariate Gaussian.}\hspace{0.2cm} mean: $\mu \in R^p$. covariance $p\times p$
 matrix $\sum$:
 \begin{align}
@@ -266,8 +263,7 @@ The classification boundary is:
 \end{remark}
 
 
-\section{Feb 9th}
-\subsection{New commands in LaTex}
+\section{New commands in LaTex}
 \begin{minted}[frame=lines, framesep=2mm,]
 {cpp}
 \newcommand{\plusbinomial}[3][2]{(#2 + #3)^#1}
@@ -297,14 +293,39 @@ parameter.
 \end{minted}
 
 
-\subsection{OpenGL}
-\myheader{Uniform .} 
-A uniform is a global GLSL variable declared with the "uniform" storage qualifier. These act as parameters that the user of a shader program can pass to that program. They are stored in a program object. 
+\section{OpenGL}
 
-Uniforms are so named because they do not change from one execution of a shader program to the next within a particular rendering call. This makes them unlike shader stage inputs and outputs, which are often different for each invocation of a program stage.
+\subsection{Window Management in OpenGL .}
+The OpenGL doesn't specify any API in order to create and manipulate windows. Modern windowing systems that support OpenGL include a sub-system that provides the binding between an OpenGL context and the windowing system. The library we use here is called \textit{OpenGL utility library}, or \textit{GLUT}. It provides a simplified API for window mangement as well 
+as envent handling, IO control and few other services.
+
+\myheader{State in OpenGL .}
+Rendering is such a complex tas that it cannot be treated as a function call that receives a few paramters,
+and correctly designed functions never receive a lot of parameters. You need to specify a lot of flags that affect
+how rendering will take place. In addition, you would often want to keep the same piece of configuration across 
+several rendering operations.  \textbf{That is why most of the configuration of rendering operations is done by setting
+flags and values in the OpenGL state machine. After calling a state changing function that particular configuration
+remains intact until the next call to the same function with a different value}.
+
+\myheader{glutMainLoop .}
+This call passes control to GLUT which now begins its own internal loop. In this loop it listens to events from 
+the windowing system and passes them via callbacks that we configured.
+
+\subsection{Hello dot}
+\myheader{GLEW .} GLEW is short for \textbf{OpenGL Extension Wrangler Library}. GLEW helps you deal with
+headache that can accompany the management of extensions in OpenGL.
+			
+\myheader{Vertex buffer objects .} VBOs are used to store vertices. They are the most efficient
+way to load vertices into the GPU. The are buffers that can be stored in video memory and provide
+the shortest access time to the GPU so they are definitely recommended.
+
+\myheader{Rasterizer .} Rasterizer maps coordinates to screen space. And finally it draws the
+primitives according to the topology which is specified in the draw call.
 
 
-\subsection{Fisher's Linear Discriminant}
+
+
+\section{Fisher's Linear Discriminant}
 \myheader{What is Fisher LDA ?} Fisher LAD is a framework for linear classification without Gaussian assumptions. It is a linear classifier projects all data onto a direction $w$.
 
 \begin{figure}[h]
@@ -315,7 +336,7 @@ Uniforms are so named because they do not change from one execution of a shader 
 	\caption{Fisher LDA.}
 \end{figure}
 
-\subsection{Logistic Regression}
+\section{Logistic Regression}
 \myheader{Why Logistic Regression ?} See Figure~\ref{fig:logistic}.
 \begin{figure}[t]
 	\centering{
@@ -344,9 +365,41 @@ x_{n+1} = x_n - \frac{f'(x_n)}{f''(x_n)}
 \]
 where $p_k$ is is the search direction chosen from the position $x_k$.
 
+\myheader{Backtracking line search .} 
+First, fix a parameter $0 < \beta < 1, 0 < \alpha < 0.5$, then at each iteration, start with $t = 1$, and while 
+\myequ{
+	f(x - \nabla f(x)) &> f(x) -  \alpha t||\nabla f(x)||^2
+}
+update $t = \beta t$. 
 
 
- 
+\section{Matrix Calculus}
+\myheader{First order derivatives}
+\myequ{
+	\frac{\partial AX}{\partial X} & = A^T \\
+	\frac{\partial X^T a}{\partial X} &= a \\
+	\frac{\partial a^T X b}{\partial X} &= ab^T \\
+	\frac{\partial a^T X^T b}{\partial X} &= ba^T
+}
+
+\myheader{Jacobian matrix and Hessian matrix}
+Jacobian matrix is the matrix of all \textbf{first-order partial derivatives} of a vector-valued function.
+Hessian matrix is a square matrix of \textbf{second-order partial derivatives} of a scalar-valued function, or scalar field.
+
+\section{Feature scaling}
+Feature scaling is a method used to standardize the range of independent variables or features of data. In data processing, it is also known as data normalization and is generally performed during the data preprocessing step.
+
+\myequ{
+	x' &= \frac{x - \min(x)}{\max(x) - \min(x)}	
+}
+
+Since the range of values of raw data varies widely, in some machine learning algorithms, objective functions will not work properly without normalization. For example, the majority of classifiers calculate the distance between two points by the Euclidean distance. If one of the features has a broad range of values, the distance will be governed by this particular feature. Therefore, the range of all features should be normalized so that each feature contributes approximately proportionately to the final distance.
+
+Another reason why feature scaling is applied is that gradient descent converges much faster with feature scaling than without it.
+
+
+
+
 
 
 
