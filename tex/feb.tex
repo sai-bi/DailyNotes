@@ -322,15 +322,16 @@ the shortest access time to the GPU so they are definitely recommended.
 \myheader{Rasterizer .} Rasterizer maps coordinates to screen space. And finally it draws the
 primitives according to the topology which is specified in the draw call.
 
-\mycode{C++}{
-	Vector3f Vertices[1];
-	Vertices[0] = Vector3f(0.0f, 0.0f, 0.0f);
-	GLuint VBO;
-	glGenBuffers(1, & VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-}
+\begin{minted}[frame=lines, framesep=2mm,]
+{cpp}
+Vector3f Vertices[1];
+Vertices[0] = Vector3f(0.0f, 0.0f, 0.0f);
+GLuint VBO;
+glGenBuffers(1, & VBO);
+glBindBuffer(GL_ARRAY_BUFFER, VBO);
+glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
+glEnableVertexAttribArray(0);
+\end{minted}
 
 \myheader{glGen* .} 
 OpenGL defines serveral \textit{glGen*} functions for generating objects of various
@@ -422,8 +423,16 @@ Since the range of values of raw data varies widely, in some machine learning al
 
 Another reason why feature scaling is applied is that gradient descent converges much faster with feature scaling than without it.
 
+\section{Likelihood function}
+A likelihood function is a function of the parameters of a statistical model. The likelihood
+of a set of parameters values $\theta$, given outcomes $x$, is equal to the probability of those
+outcomes given those parameter values, that is,
+\myequ{
+	\ell (\theta | x) &= P(x  | \theta)
+}
 
-
+For many applications, the natural logarithm of the likelihood function, called 
+\textbf{log-likelihood} is more convenient to work with.
 
 
 
