@@ -434,6 +434,70 @@ outcomes given those parameter values, that is,
 For many applications, the natural logarithm of the likelihood function, called 
 \textbf{log-likelihood} is more convenient to work with.
 
+\section{Keyword Static in Programming}
+The keyword \verb|static| has multiple uses in programming:
+\begin{itemize}
+	\item Use \verb|static| inside a function: it means that once the variable
+	has been initialized, it remains in memory until \textit{the end of the program}.
+\begin{minted}[frame=lines, framesep=2mm,tabsize=4]{cpp}
+#include <stdio.h>	
+void func() {
+  	static int x = 0;
+  	x++;
+  	printf("%d\n", x); 
+}
+
+int main() {
+	func(); // prints 1
+	func(); // prints 2
+	func(); // prints 3
+	func(); // prints 4
+	func(); // prints 5
+	return 0;
+}
+\end{minted}
+
+	\item Use \verb|static| inside a loop to prevent it from being reinitialized
+	inside a loop
+\begin{minted}[frame=lines, framesep=2mm,tabsize=4]{cpp}
+for(int x=0; x<10; x++) {
+	for(int y=0; y<10; y++) {
+		static int number_of_times = 0;
+		number_of_times++;
+	}
+}
+\end{minted}
+
+
+	\item Use \verb|static| inside a class definition. A static member 
+    variable inside a class have the same value in any instance in the class
+    and doesn't even require an instance of the class to exist.
+    \begin{remark}
+        When debugging or implementing a program using a static class member is that you cannot initialize the static class member inside of the class. In fact, if you decide to put your code in a header file, you cannot even initialize the static variable inside of the header file; do it in a .cpp file instead. Moreover, you are required to initialize the static class member or it will not be in scope. (The syntax is a bit weird: \verb|type class_name::static_variable = value"|).
+    \end{remark}
+    
+   \item \verb|static member function|. Static member functions are functions that do not require an instance of the class, and are called the same way you access static member variables -- with the class name rather than a variable name. Static member functions can only operate on static members, as they do not belong to specific instances of a class.
+\begin{minted}[frame=lines, framesep=2mm,tabsize=4]{cpp}  
+class user{
+private:
+    static int next_id;
+public:
+    static int next_user_id(){
+        next_id++;
+        return next_id;
+    }
+};
+int user::next_id = 0; // initialize static variable
+\end{minted}
+
+    \item \verb|static function|. Static functions are functions that are only visible to other functions in the same file.L
+
+    \item Use \verb|static| to define a global variable inside a file of code.
+    \begin{remark}
+        In this case, the use of static indicates that source code in other files that are part of the project cannot access the variable. Only code inside the single file can see the variable.
+    \end{remark}
+\end{itemize}
+
 
 
 
