@@ -93,12 +93,153 @@ Repeat until convergence:
 
 \myheader{How to initialize centers?} $k$-means++: start with extra centers, then prune later.
 
-\begin{minted}[frame=lines, framesep=2mm,tabsize=4]{cpp}
-Initialize centers u_1, u_2, ... u_k in some manner.
-Repeat until convergence:
-assign each point to its nearest center
-update each u_j to the mean of points assigned to it
-\end{minted}
+\begin{lstlisting}[
+style=liststy,
+]
+Pick a data point x at random as the first center
+Let $C = \{x\}$
+	Repeat until the desired number of centers is attained:
+	pick a data point $x$ at random from the following distributions: 
+		$Pr(x) \propto dist(x, C)^2$, where $dist(x, C) = min_{z\in C}||x-z||$
+	Add $x$ to $C$
+\end{lstlisting}
+
+\myheader{Streaming and online computation} If there are too much data to fit in memory, or the data
+is continuously collected, we have to update the model gradually.
+
+\myheader{The good and the bad} Good: fast and easy, effective in quantization. Bad: geared towards data in which the clusters are spherical, and of roughly the same results.
+
+\section{Mixtures of Gaussians} \index{Mixtures of Gaussians}
+Each of $k$ clusters is specified by a Guassian distribution $P_j = N(\mu_i, \sum_i)$ and a mixing weight
+$\pi_j$. The overall distribution is a mixture of all Gaussians:
+\myequ{
+	Pr(x) = \pi_1 P_1(x) + \pi_2 P_2(x) + ... + \pi_k P_k(x)
+}
+We need to determine all the parameters including $\pi, \mu, \sum$. We apply \textbf{EM} algorithm to solve this problem
+(see Figure~\ref{fig:em_mar}).
+\begin{figure}[H]
+	\centering{
+		\includegraphics[width=0.9\textwidth]{./images/mar/gmm_em.PNG}
+	}
+	\caption{EM algorithm for GMM clustering.}
+	\label{fig:em_mar}
+\end{figure}
+
+\section{Hierarchical clustering} \index{Hierarchical clustering}
+Clustering is of multi-scale, and often there is no single right answer. Hierarchical 
+clustering avoids these problems.
+\begin{lstlisting}[
+style=liststy,
+]
+Start with each point on its own
+Repeat until there is just one cluster:
+	Merge the two clusters with the $closest$ pair of points
+Discard singleton clusters
+\end{lstlisting}
+
+\myheader{Linkage method} The problem is how we measure the distance
+between two cluster of points.
+\begin{enumerate}
+	\item Single linkage: $dist(C, C') = min_{x \in C, x' \in C'} ||x - x'||$
+	\item Complete linkage: $dist(C, C') = max_{x \in C, x' \in C'} ||x - x'||$
+	\item Average linkage:
+		\begin{enumerate}
+			\item average pairwise distance between all pair of points in the two clusters
+			\item distance between cluster centers
+			\item Ward's method
+		\end{enumerate}
+\end{enumerate}
+
+
+\section{Boosting}
+\myheader{Adaboost} See Figure~\ref{fig:adaboost_mar}.
+\begin{figure}[H]
+	\centering{
+		\includegraphics[width=0.9\textwidth]{./images/mar/adaboost.PNG}
+	}
+	\caption{Adaboost algorithms.}
+	\label{fig:adaboost_mar}
+\end{figure}
+
+\myheader{Bagging} See Figure~\ref{fig:bagging_mar}
+\begin{figure}[H]
+	\centering{
+		\includegraphics[width=0.9\textwidth]{./images/mar/bagging.PNG}
+	}
+	\caption{Bagging.}
+	\label{fig:bagging_mar}
+\end{figure}
+
+
+\myheader{Random forest} See Figure~\ref{fig:random_forest_mar}
+\begin{figure}[H]
+	\centering{
+		\includegraphics[width=0.9\textwidth]{./images/mar/random_forest.PNG}
+	}
+	\caption{Random forests.}
+	\label{fig:random_forest_mar}
+\end{figure}
+
+\section{Informative projections} \index{Informative projections}
+
+\myheader{Project to multiple directions} Suppose we want to project $x \in \mathbb{R}^p$
+into the $k$-dimensional subspace spanned by $u_1, u_2, ..., u_k \in \mathbb{R}^p$, 
+and suppose all $u_i$ are orthonormal (each has length one, and they are perpendicular to 
+each other). Then the projection is:
+\myequ{
+	(x \cdot u_1)u_1 + (x \cdot u_2)u_2 + ... + (x \cdot u_k)u_k = UU^Tx
+}
+
+\myheader{Best single direction} Suppose we want to map our data $x_1, x_2, ..., x_n \in 
+\mathbb{R}^p$ into just one dimension $x \mapsto u \cdot x$, what is the best direction $u$.
+
+The best direction $u$ should be the one that maximize the variance after projection. Let $X$
+be the data matrix, where each column is a data point, and $\sum$ be the covariance matrix of $X$. 
+Suppose the mean of $X$ is $\mu \in \mathbb{R}^p$, then 
+\myequ{
+	\mathbb{E}(u^T X) & = u^T \mathbb{E}(X) = u^T \mu \\
+	var(u^T X) & = \mathbb{E}(u^T X - u^T \mu) = \mathbb{E} (u^T (X - \mu) (X - \mu)^T u)  \\	
+				& = u^T \mathbb{E}(X - \mu)(X - \mu)^T u = u^T \sum u
+}
+
+\begin{remark}
+	$u^T\sum u$ is maximized by setting $u$ to the first \textbf{eigenvector} of $\sum$. The maximum
+	value is the corresponding eigenvalue.
+\end{remark}
+
+
+\myheader{Best $k$-dimensional projection} Let $\sum$ be the $p\times p$ covariance matrix of $X$. 
+and $\lambda_1 \geq  \lambda_2 \geq ... \geq \lambda_p$ are the eigenvalues, and $u_1, u_2, ...
+u_p$ are the corresponding eigenvectors. Then the best $k$-dimensional projection directions are
+$u_1, u_2, ..., u_k$.
+
+
+\myheader{Spectral decomposition} See Figure~\ref{fig:spec_decomp_mar}.
+\begin{figure}[H]
+	\centering{
+		\includegraphics[width=0.9\textwidth]{./images/mar/spectral_decomp.PNG}
+	}
+	\caption{Spectral decomposition.}
+	\label{fig:spec_decomp_mar}
+\end{figure}
+
+\myheader{Singular value decomposition (SVD)} See Figure~\ref{fig:svd_mar}
+
+\begin{figure}[H]
+	\centering{
+		\includegraphics[width=0.9\textwidth]{./images/mar/SVD.PNG}
+	}
+	\caption{Singular value decomposition.}
+	\label{fig:svd_mar}
+\end{figure}
+
+
+\section{Beyond projections} \index{Beyond projections}
+
+
+
+
+
 
 
 

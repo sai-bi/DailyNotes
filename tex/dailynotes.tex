@@ -4,6 +4,7 @@
 \usepackage{minted}
 \usepackage{parskip}
 \usepackage{amsmath}
+\usepackage{listings}
 
 \newcommand{\argmin}{\arg\!\min}
 \newcommand{\argmax}{\arg\!\max}
@@ -11,8 +12,19 @@
 
 \newcommand{\myequ}[1]{\begin{align}\begin{split} #1 \end{split}\end{align}}
 
-% \newcommand{\mycode}[1]{\begin{minted}[frame=lines, framesep=2mm,]{cpp}  #1 \end{minted}}
-
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstdefinestyle{liststy}{
+	mathescape,
+	columns=fullflexible,
+	basicstyle=\fontfamily{lmvtt}\selectfont,
+	frame=L,
+	xleftmargin=\parindent,
+	tabsize=4,
+	frame=single,
+	numberstyle=\tiny\color{mygray},
+	numbers=left, 
+}
 
 \begin{document}
 	\begingroup
