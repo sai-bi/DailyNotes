@@ -1,0 +1,114 @@
+\chapter{March}
+
+\section{Perceptron algorithm} \index{Perceptron algorithm}
+Suppose we have input data $(x_1, y_1), (x_2, y_2), ..., (x_n, y_n) \in \mathbb{R}^p \times \{-1, 1\}$, 
+and if the data points are separable, the perceptron algorithm works as following:
+
+\begin{minted}[frame=lines, framesep=2mm,tabsize=4]{cpp}
+w = 0
+while some (x, y) is misclassified:
+    w = w + yx
+\end{minted}
+
+\begin{remark}
+In the separable case, perceptron algorithm guarantees to converge.
+\end{remark}
+
+\myheader{Multi-class perceptron}
+\begin{minted}[frame=lines, framesep=2mm,tabsize=4]{cpp}
+w_1 = w_2 = ... = w_k = 0
+while some (x, y) is misclassified:
+    for correct label y: w_y = w_y + x
+    for incorrect label y*: w_(y*)  = w_(y*) - x
+\end{minted}
+
+\section{Kernel function} \index{Kernel function}
+Following the perceptron algorithm, suppose $\phi$ is a function that maps $x$ to another feature space, such as $\phi(x) = (1, x_1, x_2, ..., x_1^2, x_2^2,..., x_1 x_2,...)$, which is a quadratic embedding.
+In this case we can also run perceptron algorithm in the new feature space. 
+
+\begin{minted}[frame=lines, framesep=2mm,tabsize=4]{cpp}
+w = 0
+while y*(w * \phi(x)) < 0:
+w = w + y\phi(x)
+\end{minted}
+
+A problem is that every time we need to calculate $\phi(x)$, which may be of high dimensions. To solve this problem, we observe that in fact we don't need to access $\phi(x)$ at all to make a decision, instead we
+can write $w$ as following:
+\myequ{
+    w = a_1 \phi(x_1) + a_2 \phi(x_2) + ... + a_n \phi(x_n)
+}
+then $w\cdot\phi(x)$ is a weighted sum of $\phi(x)\cdot\phi(x_i)$. In addition, we also observe that
+\myequ{
+    \phi(x) \cdot \phi(z) = (1 + x\cdot z)^2
+}
+That is, we don't need to calculate $\phi(x)$.
+
+
+\myheader{kernel function} From above we know that we don't care about the embedding $\phi(x)$, we only 
+care about the similarity between a pair of data points. Therefore, the kernel function is defined as following:
+\vspace{0.5cm}
+\begin{definition}[Kernel function]
+    A function $k$: $\mathbb{R}^p \times \mathbb{R}^p \rightarrow \mathbb{R}$ is a valid kernel if it corresponds to some embedding, that is, there exists $\phi$ defined on $\mathbb{R}^p$ such that
+    \myequ{
+        k(x,z) = \phi(x) \cdot \phi(z)
+        }
+\end{definition}
+
+This is equivalent to require that for any finite subset $\{x_1, x_2, ..., x_m\} \subset \mathbb{R}^p$,
+the $m \times m$ similarity matrix 
+\myequ{
+    K_{ij} = k(x_i, x_j)
+    }
+is \textit{positive semidefinite}. Proof:
+\myequ{
+    Z^T K Z = Z^T (X^T X) Z = (XZ)^T (XZ) \geq 0
+    }
+
+\myheader{RBF kernel}
+RBF kernel or Gaussian kernel is defined as
+\myequ{
+    k(x,z) = e^{-||x-z||^2 / 2\sigma^2}
+    }
+
+\myheader{string kernel}
+For each substring $s$, we define feature:
+\myequ{
+    \phi_s(x) &= \# \text{ of times substring $s$ appears in $x$} \\
+    \phi(x) &= (\phi_s(x): \text{ all strings } s)
+    }
+
+
+\section{$k$-means Clustering}\index{$k$-means Clustering}
+\myheader{$k$-means} Minimize average squared distance between points and their nearest representatives.
+The input is data points $x_1, x_2, ..., x_n$, and integer $k$, and the output is centers
+$\mu_1, \mu_2, ..., \mu_k$.
+
+\myheader{Lloyd's $k$-means algorithm}
+\begin{minted}[frame=lines, framesep=2mm,tabsize=4]{cpp}
+Initialize centers u_1, u_2, ... u_k in some manner.
+Repeat until convergence:
+    assign each point to its nearest center
+    update each u_j to the mean of points assigned to it
+\end{minted}
+
+\myheader{How to initialize centers?} $k$-means++: start with extra centers, then prune later.
+
+\begin{minted}[frame=lines, framesep=2mm,tabsize=4]{cpp}
+Initialize centers u_1, u_2, ... u_k in some manner.
+Repeat until convergence:
+assign each point to its nearest center
+update each u_j to the mean of points assigned to it
+\end{minted}
+
+
+
+
+
+
+
+
+
+
+
+
+
