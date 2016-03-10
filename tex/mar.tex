@@ -223,7 +223,15 @@ $u_1, u_2, ..., u_k$.
 	\label{fig:spec_decomp_mar}
 \end{figure}
 
-\myheader{Singular value decomposition (SVD)} See Figure~\ref{fig:svd_mar}
+\myheader{Singular value decomposition (SVD)} See Figure~\ref{fig:svd_mar}. 
+    Where $u_i, \sigma_i, v_i$ comes from? We know that:
+    \begin{itemize}
+        \item $Mv_i = \sigma_i u_i, M^T u_i = \sigma_i v_i$
+        \item $M M^T u_i = \sigma_i^2 u_i, M^T M v_i = \sigma_i^2 v_i$
+    \end{itemize}
+    Therefore, $v_i$ is the eigenvectors of $M^T M$, and $u_i$ is the eigenvectors
+    of $M M^T$. $MM^T$ and $M^TM$ has the same eigenvalues $\sigma_i^2$.  Note
+    that all $\sigma_i$ are \textbf{non-negative}.
 
 \begin{figure}[H]
 	\centering{
@@ -233,8 +241,100 @@ $u_1, u_2, ..., u_k$.
 	\label{fig:svd_mar}
 \end{figure}
 
+\section{Positive definite matrix }
+\vspace{0.5cm}
+\begin{definition}[Positive definite matrix]
+    A square $p \times p$ symmetric matrix $A$ is positive definite if for all
+    nonzero $x \in \mathbb{R}^p$,
+    \myequ{
+        x^T A x > 0
+        }
+\end{definition}
+
+\myheader{Properties of positive definite matrix}
+\begin{enumerate}
+    \item The $r \times r$ submatrix $A_r$ (start from top left element) is also positive
+    semidefinite.
+    \item The $p$ eigenvalues of A $\lambda_1, \lambda_2, ..., \lambda_p$ are positive.
+    Conversely, if all the eigenvalues of a matrix $B$ are
+    positive, then $B$ is positive definite.
+    
+    \item There exist a unique decomposition of $A = LL^T$, where $L$ is a lower triangular
+    matrix. This is called \textit{Cholesky Decomposition}. 
+    \item There exists a unique decomposition of $A = VDV^T$.
+    
+\end{enumerate}
+        
+  
 
 \section{Beyond projections} \index{Beyond projections}
+Sometimes data in a high-dimensional space $\mathbb{R}^p$ in fact
+lies close to a $k$-dimensional manifold, for $k\ll p$.
+
+\myheader{ISOMAP algorithm}
+Given data $x_1, x_2, ..., x_n$,
+\begin{enumerate}
+\item estimate \textit{geodesic distances} between the data points, that is, distance along the manifold.
+\item embed these points in Euclidean space so as to match these distances.
+\end{enumerate}
+
+\myheader{Geodesic distances}
+To estimate geodesic distances:
+\begin{enumerate}
+   \item Construct neighborhood graph, connect nodes whenever two nodes are close together.
+   \item Compute distance in this graph (shortest-path algorithm).  
+\end{enumerate}
+
+\myheader{Distance-preserving embeddings} Problem definition:
+\begin{lstlisting}[
+style=liststy,] 
+Input:an $n\times n$ matrix of pairwise distances $D$, where $D_ij$ is the distance between 
+points $i$ and $j$.
+Output: an embedding $z_1, z_2, ..., z_n \in \mathbb{R}^k$ that realizes these distances as closely as 
+possible.
+\end{lstlisting}
+
+\myheader{Gram matrix}
+Gram matrix on a set of vectors $z_1, z_2, ..., z_n$ is the matrix $B$ where
+$B_{ij} = z_i \cdot z_j$.
+
+\myheader{Classical multidimensional scaling} See Figure~\ref{fig:cms_mar}
+
+\begin{figure}[H]
+    \centering{
+        \includegraphics[width=0.9\textwidth]{./images/mar/cms.PNG}
+    }
+    \caption{Classical multidimensional scaling.}
+    \label{fig:cms_mar}
+\end{figure}
+
+
+\section{Semisupervised and active learning} \index{Semisupervised and active learning}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
