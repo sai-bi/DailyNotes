@@ -309,12 +309,47 @@ $B_{ij} = z_i \cdot z_j$.
 \end{figure}
 
 
-\section{Semisupervised and active learning} \index{Semisupervised and active learning}
+\section{Jacobian matrix} \index{Jacobian matrix}
+In vector calculus, the Jacobian matrix is the matrix of all first-order partial derivatives of a vector-valued function.
+\myequ{
+    J  = \frac{d \mathbf{f}}{d \mathbf{x}} &= \begin{bmatrix}
+        \frac{\partial \mathbf{f}}{\partial x_1} &
+         \frac{\partial \mathbf{f}}{\partial x_2} &
+         \dots & \frac{\partial \mathbf{f}}{\partial x_n} 
+    \end{bmatrix}    \\
+    & = \begin{bmatrix}
+        \frac{\partial f_1}{\partial x_1} &
+        \dots &
+        \frac{\partial f_1}{\partial x_n} \\
+         \vdots & \ddots & \vdots \\
+         \frac{\partial f_m}{\partial x_1}  &
+         \dots &
+         \frac{\partial f_m}{\partial x_n} 
+    \end{bmatrix}
+}
 
+\section{Gaussian-Newton algorithm} \index{Gaussian-Newton algorithm}
+The Gaussian-Newton algorithm is used to solve non-linear least square problems. It is a modification
+of Newton's method for finding a minimum of a function. Unlike Newton's method, the Gaussian-Newton algorithm
+can only be used to minimize a sum of squared function values, but it has the advantage that the second
+derivatives, which can be challenging to compute, are not required.
 
-
-
-
+Given $m$ functions $r = (r_1, r_2, \dots, r_m)$ (often called residuals) of $n$ variables $\mathbf{\beta} = (\beta_1, \dots, \beta_n)$ with $m \geq n$, the Gauss–Newton algorithm iteratively finds the value of the variables which minimizes the sum of squares:
+\myequ{
+  S(\beta) = \sum\limits_{i=1}^{m} r_i^2(\beta)
+} 
+Start with an initial guess $\mathbf{\beta}^{(0)}$, the method proceeds by the iterations:
+\myequ{
+    \mathbf{\beta}^{(s+1)} = \mathbf{\beta}^{(s)}    - (J_r^T J_r)^{-1} J_r^T r(\mathbf{\beta}^{(s)})    
+}
+where 
+\myequ{
+    (J_r)_{ij} = \frac{\partial r_i(\beta^{(s)})}{\partial \beta_j}
+}
+If $m = n$, the iteration simplifies to 
+\myequ{
+    \mathbf{\beta}^{(s+1)} = \mathbf{\beta}^{(s)}    - (J_r)^{-1} r(\mathbf{\beta}^{(s)})
+}
 
 
 
