@@ -352,14 +352,36 @@ If $m = n$, the iteration simplifies to
 }
 
 
+\section{Functional programming: introductions} \index{Functional programming: introductions}
 
+\myheader{Why FP?}
+We want software to be \textit{readable, reusable, modifiable, predictable and checkable}. Functional
+programming could satisfy these requirements. 
 
+There is no assignment, mutation, or loop in FP.
 
+\section{$\lambda$-calculus}\index{$\lambda$-calculus}
+Lambda calculus (also written as $\lambda$-calculus) is a formal system in mathematical logic for expressing computation
+ based on function abstraction and application using variable binding and substitution.
 
+\myheader{Syntax}
+Three kinds of expressions:
+\begin{lstlisting}[
+style=liststy,] 
+e ::= x             
+    | $\lambda$ x. e      
+    | $\lambda$ e_1 e_2   
+\end{lstlisting}
+called \textit{variables}, \textit{functions}($\lambda$-abstraction), and \textit{application}.
+Functions $\lambda x. e$ takes $x$ as an input and output $e$.
+ 
+Application associates to the left: $x y z$ means $(x y) z$. However, abstraction extends as far right
+as possible:
+$\lambda x. x \lambda y. x y z \Rightarrow \lambda x. (x \lambda y. ((x y) z))$ 
 
+Identity function: $I = \lambda x. x$
 
-
-
+\myheader{Scope of identifier (variable)}
 
 
 
