@@ -384,10 +384,34 @@ Identity function: $I = \lambda x. x$
 \myheader{Scope of identifier (variable)}
 Scope of a variable is the part of program where the variable is \textit{accessible}.
 
+$\lambda x. E$ binds variable $x$ in $E$:
+\begin{enumerate}
+    \item $x$ is the newly introduced varialbe.
+    \item $E$ is the scope of $x$.
+    \item $x$ is bound in $\lambda x. E$
+\end{enumerate}
 
+$y$ is \textit{free} if it occurs not bound in $E$:
+\begin{enumerate}
+    \item $Free(x) = \{x\}$
+    \item $Free(E_1 E_2) = Free(E_1) \cup Free(E_2)$ 
+    \item $Free(\lambda x. E) = Free(E) - \{x\}$
+\end{enumerate}
 
+$\alpha$-renaming:
+\begin{enumerate}
+    \item Allows bound variable names to be changed.
+    \item $\lambda x. x = \lambda y. y$
+\end{enumerate}
 
-
+substitution:
+\begin{enumerate}
+    \item $[E'/x]E$: use $E'$ to substitute all $x$ bounded in $E$
+    \item $[y (\lambda x. x)/x] \lambda y. (\lambda x. x) y x
+           \equiv$
+           $[y (\lambda v. v)/x] \lambda y. (\lambda u. u) z x $ (renaming)
+           $\equiv \lambda z. (\lambda u. u) z (y (\lambda v. v))$ (substitution) 
+\end{enumerate}
 
 
 
