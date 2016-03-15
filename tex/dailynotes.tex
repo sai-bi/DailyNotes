@@ -23,8 +23,33 @@
 	tabsize=4,
 	frame=single,
 	numberstyle=\tiny\color{mygray},
-	numbers=left, 
+	numbers=left,
 }
+
+
+
+\usepackage{fontspec}
+
+\setsansfont{Calibri}
+\setmonofont{Consolas}
+
+\newminted{haskell}{
+    frame=single,framesep=10pt,
+    mathescape,
+    linenos,
+    numbersep=5pt,
+    breaklines,
+    breakautoindent=false,
+    breaksymbolleft=\raisebox{0.8ex}{
+        \small\reflectbox{\carriagereturn}},
+    breaksymbolindentleft=0pt,
+    breaksymbolsepleft=0pt,
+    breaksymbolright=\small\carriagereturn,
+    breaksymbolindentright=0pt,
+    breaksymbolsepright=0pt,
+    }
+\renewcommand{\theFancyVerbLine}{
+\sffamily\textcolor[rgb]{0.5,0.5,0.5}{\scriptsize\arabic{FancyVerbLine}}}
 
 \begin{document}
 	\begingroup

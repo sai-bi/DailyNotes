@@ -456,6 +456,84 @@ function takes $b_1, b_2$
 or $\equiv \lambda b_1 . \lambda b_2 . (\lambda x. \lambda y.\ b_1\ x (b_2 \ x \ y))$  
 \end{lstlisting}
 
+records:
+\begin{lstlisting}[
+style=liststy,] 
+pair = function takes a bool
+       return the left or right element
+mkpair $e_1 \ e_2 \equiv \lambda b. \ b\ e_1\ e_2$  
+fst p $\equiv$ p true
+snd p $\equiv$ p false
+\end{lstlisting}
+
+natural numbers:
+\begin{lstlisting}[
+style=liststy,] 
+natural number: iterate a number of times over some function
+$n$ = function that takes function $f$, starting value $s$
+      returns: $f$ applied to $s$ $n$ times
+$0 \equiv \lambda f. \lambda s. \ s$
+$1 \equiv \lambda f. \lambda s. \ f \ s$
+$2 \equiv \lambda f. \lambda s. \ f (f \ s)$
+(n f s) = apply f to s n times
+\end{lstlisting}
+
+operations on natural numbers:
+\begin{lstlisting}[
+style=liststy,] 
+iszero n $\Leftrightarrow$ n ($\lambda$ b. false) true
+iszero $\Leftrightarrow$ $\lambda $ n. ($\lambda$ b. false) true
+succ n  $\Leftrightarrow$ $\lambda$f. $\lambda$s. f (n f s)
+add a b $\Leftrightarrow$ a succ b
+multi a b $\Leftrightarrow$ a (add b) 0
+\end{lstlisting}
+
+
+\section{Haskell: basics}\index{Haskell: basics}
+Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.
+
+\myheader{GHC system}
+\begin{lstlisting}[
+style=liststy,
+language=Haskell,]
+:load foo.hs
+:type expression
+:info variable
+\end{lstlisting}
+
+\myheader{Basic types}
+\begin{haskellcode}
+32   :: Integer
+4.2  :: Double
+'a'  :: Char
+True :: Bool
+
+-- function types
+pos :: Integer -> Bool
+pos x = (x > 0)
+
+-- multiple argument function types
+-- function takes args of A1, A2, A3, gives out B
+A1 -> A2 -> A3 -> B
+
+-- tuples, elements do not have to be of the same type
+(A1, ..., An)
+-- pattern matching extracts values from tuple
+pat :: (Int, Int, Int) -> Int
+pat (x, y, z) = x * (y + z)
+
+-- Lists, elements have to be of the same type
+[1, 3, 5, 7]
+-- construct lists
+'a' : ['b', 'c'] = ['a', 'b', 'c']
+cons2 x y zs = x : y : zs
+\end{haskellcode}
+
+
+
+
+
+
 
 
 
