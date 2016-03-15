@@ -413,19 +413,48 @@ substitution:
            $\equiv \lambda z. (\lambda u. u) z (y (\lambda v. v))$ (substitution) 
 \end{enumerate}
 
+$\beta$-reduction:
+\begin{enumerate}
+    \item $\beta$-reduction captures the idea of function application.
+    \item $(\lambda x. e) e' \rightarrow [e'/x]e$
+    \item $((\lambda n. n\times2) 7) \rightarrow 7\times 2$
+\end{enumerate}
 
+local variable:
+\begin{lstlisting}[
+style=liststy,] 
+let x = $e_1$ in $e_2$
+$\equiv (\lambda x. e_2) e_1$
+\end{lstlisting}
 
+boolean:
+\begin{lstlisting}[
+style=liststy,] 
+true $\equiv$ $\lambda x. \lambda y. x$
+false $\equiv$ $\lambda x. \lambda y. y$
+if $E_1$ then $E_2$ else $E_3$ $\equiv$ $E_1 E_2 E_3$
+if true then u else v $\rightarrow$ $(\lambda x. \lambda y. x) u\ v  \rightarrow (\lambda  y. u) \rightarrow u$  
+\end{lstlisting}
 
+not:
+\begin{lstlisting}[
+style=liststy,]
+function takes b:
+    return function x, y:
+        return (if b then y else x)
 
+not $\equiv \lambda b. (\lambda x. \lambda y. \  b\ y\ x)$
+not true $\rightarrow \lambda x. \lambda y. \ true \ y \ x \rightarrow \lambda x. \lambda y. \ y \rightarrow false$ 
+\end{lstlisting}
 
-
-
-
-
-
-
-
-
+or:
+\begin{lstlisting}[
+style=liststy,] 
+function takes $b_1, b_2$
+    return function takes x, y:
+        return (if $b_1$ then x else (if $b_2$ then x else y))
+or $\equiv \lambda b_1 . \lambda b_2 . (\lambda x. \lambda y.\ b_1\ x (b_2 \ x \ y))$  
+\end{lstlisting}
 
 
 
