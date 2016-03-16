@@ -676,6 +676,134 @@ fuseActions :: [IO ()] -> IO ()
 fuseActions = foldr (>>) (return ())
 \end{haskellcode}
 
+\section{Higher-order programming} \index{Higher-order programming}
+
+\myheader{Recursive types}
+\begin{haskellcode}
+data Shape  = Rectangle Double Double 
+            | Polygon [(Double, Double)]
+
+data IntTree = ILeaf Int
+             | INode IntTree IntTree
+\end{haskellcode}
+
+\myheader{Parameterized types}
+
+\begin{haskellcode}
+-- a is a type
+data List a = Empty
+            | OneAndMore a (List a)
+
+data Tree a = Leaf a
+            | Node (Tree a) (Tree a)
+
+type IntList = List Int
+type CharList = List Char
+type DoubleList = List Double
+\end{haskellcode}
+
+\myheader{Kinds}
+In the area of mathematical logic and computer science known as type theory, 
+a kind is the type of a type constructor or, less commonly, the type of a higher-order type operator. 
+
+The \textit{Tree a} corresponds to trees of values of type a. 
+If a is the type parameter, then what is Tree ? 
+A function that takes a type a as input and returns a type Tree a as output! 
+But wait, if List is a function then what is its type? A \textit{kind} is the type of a type.
+
+\begin{haskellcode}
+:kind Int -- *
+:kind Char -- *
+:kind Bool -- * -> *
+:kind (->) -- * -> * -> *
+\end{haskellcode}
+
+\begin{enumerate}
+    \item *: the kind of all data types seen as nullary type constructors, 
+    and also called proper types in this context.
+    \item * -> * : the kind of a unary type constructor, e.g. list type constructor.
+    \item * -> * -> * : the kind of a binary type constructor (via currying), e.g. of 
+             a pair type constructor  and also that of a function type constructor.
+    \item (* -> *) -> *: the kind of a higher-order type operator from unary type constructors to proper types.
+\end{enumerate}
+
+
+\section{Haskell: typeclass}\index{Haskell: typeclass}
+We want the operator such as $+$ to work for a bunch of different data types
+such as integers, doubles. So what should be the type of $+$?
+
+\begin{haskellcode}
+-- too anemic
+(+) :: Integer -> Integer -> Integer
+-- too aggressive, it doesn’t make sense to add two functions
+(+) :: a -> a -> a
+\end{haskellcode}
+
+Haskell solves this problem with an insanely slick mechanism called typeclasses.
+
+\myheader{Qualified types}
+\begin{haskellcode}
+-- truth
+(+) :: (Num a) => a -> a -> a
+\end{haskellcode}
+We call the above a qualified type. Read it as, $+$ takes in two a values and returns an a value 
+for any type a that is a Num or is an instance of Num.
+
+The name Num can be thought of as a predicate over types. 
+Some types satisfy the Num predicate. Examples include Integer, Double etc, and any values of those types can be passed to +. 
+Other types do not satisfy the predicate. Examples include Char, String, functions etc, and 
+so values of those types cannot be passed to +.
+
+\myheader{Typeclass}
+A \textit{typeclass} is a collection of operations (functions) that must exist for the underlying type.
+
+\begin{haskellcode}
+-- typeclass Eq
+class  Eq a  where
+  (==) :: a -> a -> Bool
+  (/=) :: a -> a -> Bool
+
+-- typeclass show
+class  Show a  where
+  show :: a -> String
+\end{haskellcode}
+A type a can be an instance of Eq as long as there are two functions 
+that determine if two a values are respectively equal or disequal. 
+Similarly, the typeclass Show captures the requirements that make a particular datatype be viewable,
+
+\myheader{Automatic derivation}
+Haskell allows us automatically derive functions for certain key type classes, namely those in the standard library.
+\begin{haskellcode}
+data Showable = A' | B' | C' deriving (Eq, Show)
+
+class (Eq a, Show a) => Num a where
+    (+) :: a -> a -> a
+    (*) :: a -> a -> a
+    (-) :: a -> a -> a
+    negate :: a -> a
+    abs :: a -> a
+    signum :: a -> a
+    fromInteger :: Integer -> a
+-- A type T can only be deemed an instance of Num if
+--     1. The type is also an instance of Eq and Show, and
+--     2. There are functions for adding, multiplying, etc
+\end{haskellcode}
+
+\myheader{Explicit signatures}
+While Haskell is pretty good about inferring types in general, 
+there are cases when the use of type classes requires explicit annotations.
+\begin{haskellcode}
+-- Read is a build typeclass, parse a string and turn it into an a
+read:: (Read a) => String -> a
+
+-- read "2" -- error: it doesn’t know what to convert the string to
+-- (read "2") :: Int -- correct
+-- (read "2") :: Double -- correct
+\end{haskellcode}
+
+\myheader{Instantiating typeclass}
+
+
 
 
 
