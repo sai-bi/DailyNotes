@@ -527,17 +527,154 @@ pat (x, y, z) = x * (y + z)
 -- construct lists
 'a' : ['b', 'c'] = ['a', 'b', 'c']
 cons2 x y zs = x : y : zs
+
+-- type
+-- Not a new type, just shorthand
+type XY = (Double, Double)
+type Circle = (Double, Double, Double)
+-- data creates new types
+data CircleT = Circle (Double, Double, Double)
+data Shape =
+    | Rectangle Side Side
+    | Ellipse Radius Radius
+    | RtTriangle Side Side
+    | Polygon [Vertex]
+type Side = Double
+type Radius = Double
+type Vertex = (Double, Double)
 \end{haskellcode}
 
 
+\myheader{Input and output}
+
+\begin{haskellcode}
+-- action: value describing an effect on world
+IO a -- type of an action that returns an a
+
+-- takes input string, return action that writes string to stdout
+putStr :: String -> IO () 
+
+-- only one way to execute action: make it the value of name main
+main :: IO ()
+main = putStr "hello world\n"
+
+-- do many actions with 'do'
+do putStr "Hello"
+   putStr "World"
+   putStr "\n"
+   
+-- input
+getLine :: IO String
+main:: IO()
+main = do putStr "What is your name?"
+       n <- getLine -- assignment
+       putStrLn ("Happy New Year " ++ n)
+\end{haskellcode}
 
 
+\section{Haskell: higher-order functions}\index{Haskell: higher-order functions}
+In all functional languages, functions are first-class values, meaning, that they can be treated just as you would any other data. That is, you can pass functions around to in any manner that you can pass any other data around in.
 
+\myheader{Functions are data}
+\begin{haskellcode}
+plus1 :: Int -> Int
+plus1 x = x + 1
 
+minus1 :: Int -> Int
+minus1 x = x - 1
 
+funp :: (Int -> Int, Int -> Int)
+funp = (plus1, minus1)
+\end{haskellcode}
 
+\myheader{Take functions as input and output}
+\begin{haskellcode}
+-- functions as input
+doTwice :: (t -> t) -> t -> t
+doTwice f x = f (f x)
 
+-- functions as output
+plusn :: Int -> (Int -> Int)
+plusn n = f
+          where f x = x + n
 
+-- partially apply functions
+plus :: Int -> Int -> Int
+plus a b = a + b
+plus5 :: Int -> Int
+plus5 = plus 5 -- plus5 1000 outputs 1005
+\end{haskellcode}
+
+\myheader{Anonymous functions}
+We will see many situations where a particular function is only used once, and hence, 
+there is no need to explicitly name it. Haskell provides a mechanism to create such anonymous functions.
+
+\begin{haskellcode}
+\x -> x + 1
+(\x -> x + 1) 100 -- 101
+doTwice (\x -> x + 1) 100 -- 102
+\end{haskellcode}
+
+\myheader{Infix operations}
+Haskell allows you to use any function as an infix operator,
+simply by wrapping it inside backticks.
+
+To further improve readability, Haskell allows you to use partially applied infix operators, ie infix operators with only a single argument. These are called \textit{sections}.
+\begin{haskellcode}
+2 `plus` 4 -- 6
+doTwice (+1) 0 -- 2
+doTwice (1+) 0 -- 2
+doTwice (1:) [2..5] -- [1, 1, 2, 3, 4, 5]
+\end{haskellcode}
+
+\myheader{Polymorphism}
+\textit{doTwice} is polymorphic in that it works with different kinds of values, 
+e.g. functions that increment integers and concatenate strings. This is vital for \textit{abstraction}.
+
+Polymorphic functions which can operate on different kinds values are often associated with polymorphic 
+data structures which can contain different kinds of values. 
+These are also represented by types containing type variables.
+
+\begin{haskellcode}
+foo :: a -> (a -> b) -> b
+foo x f = f x
+
+x |> f = f x
+
+do1 :: (a -> b) -> a -> b
+do1 f x = x |> f
+
+do2 :: (a -> a) -> a -> a
+do2 f x = x |> f |> f
+\end{haskellcode}
+
+\myheader{Bottling Computation Patterns With Polymorphic Higher-Order Functions}
+
+\begin{haskellcode}
+toUpperString :: String -> String
+toUpperString [] = []
+toUpperString (c:cs) = toUpper c : toUpperString cs
+
+-- map
+map :: (a -> b) -> [a] -> [b]
+map f [] = []
+map f (x:xs) = (f x) : (map f xs)
+
+toUpperString = map toUpper
+
+-- foldr
+foldr op base [] = base
+foldr op base (x:xs) = x `op` (foldr op base xs)
+
+-- foldr on actions
+fuseActions :: [IO ()] -> IO ()
+fuseActions []        = return ()
+fuseActions (a1:acts) = do a1
+                           fuseActions acts
+
+fuseActions :: [IO ()] -> IO ()
+fuseActions = foldr (>>) (return ())
+\end{haskellcode}
 
 
 
