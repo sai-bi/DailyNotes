@@ -98,10 +98,10 @@ style=liststy,
 ]
 Pick a data point x at random as the first center
 Let $C = \{x\}$
-	Repeat until the desired number of centers is attained:
-	pick a data point $x$ at random from the following distributions: 
-		$Pr(x) \propto dist(x, C)^2$, where $dist(x, C) = min_{z\in C}||x-z||$
-	Add $x$ to $C$
+    Repeat until the desired number of centers is attained:
+    pick a data point $x$ at random from the following distributions: 
+        $Pr(x) \propto dist(x, C)^2$, where $dist(x, C) = min_{z\in C}||x-z||$
+    Add $x$ to $C$
 \end{lstlisting}
 
 \myheader{Streaming and online computation} If there are too much data to fit in memory, or the data
@@ -113,16 +113,16 @@ is continuously collected, we have to update the model gradually.
 Each of $k$ clusters is specified by a Guassian distribution $P_j = N(\mu_i, \sum_i)$ and a mixing weight
 $\pi_j$. The overall distribution is a mixture of all Gaussians:
 \myequ{
-	Pr(x) = \pi_1 P_1(x) + \pi_2 P_2(x) + ... + \pi_k P_k(x)
+    Pr(x) = \pi_1 P_1(x) + \pi_2 P_2(x) + ... + \pi_k P_k(x)
 }
 We need to determine all the parameters including $\pi, \mu, \sum$. We apply \textbf{EM} algorithm to solve this problem
 (see Figure~\ref{fig:em_mar}).
 \begin{figure}[H]
-	\centering{
-		\includegraphics[width=0.9\textwidth]{./images/mar/gmm_em.PNG}
-	}
-	\caption{EM algorithm for GMM clustering.}
-	\label{fig:em_mar}
+    \centering{
+        \includegraphics[width=0.9\textwidth]{./images/mar/gmm_em.PNG}
+    }
+    \caption{EM algorithm for GMM clustering.}
+    \label{fig:em_mar}
 \end{figure}
 
 \section{Hierarchical clustering} \index{Hierarchical clustering}
@@ -133,51 +133,51 @@ style=liststy,
 ]
 Start with each point on its own
 Repeat until there is just one cluster:
-	Merge the two clusters with the $closest$ pair of points
+    Merge the two clusters with the $closest$ pair of points
 Discard singleton clusters
 \end{lstlisting}
 
 \myheader{Linkage method} The problem is how we measure the distance
 between two cluster of points.
 \begin{enumerate}
-	\item Single linkage: $dist(C, C') = min_{x \in C, x' \in C'} ||x - x'||$
-	\item Complete linkage: $dist(C, C') = max_{x \in C, x' \in C'} ||x - x'||$
-	\item Average linkage:
-		\begin{enumerate}
-			\item average pairwise distance between all pair of points in the two clusters
-			\item distance between cluster centers
-			\item Ward's method
-		\end{enumerate}
+    \item Single linkage: $dist(C, C') = min_{x \in C, x' \in C'} ||x - x'||$
+    \item Complete linkage: $dist(C, C') = max_{x \in C, x' \in C'} ||x - x'||$
+    \item Average linkage:
+        \begin{enumerate}
+            \item average pairwise distance between all pair of points in the two clusters
+            \item distance between cluster centers
+            \item Ward's method
+        \end{enumerate}
 \end{enumerate}
 
 
 \section{Boosting}
 \myheader{Adaboost} See Figure~\ref{fig:adaboost_mar}.
 \begin{figure}[H]
-	\centering{
-		\includegraphics[width=0.9\textwidth]{./images/mar/adaboost.PNG}
-	}
-	\caption{Adaboost algorithms.}
-	\label{fig:adaboost_mar}
+    \centering{
+        \includegraphics[width=0.9\textwidth]{./images/mar/adaboost.PNG}
+    }
+    \caption{Adaboost algorithms.}
+    \label{fig:adaboost_mar}
 \end{figure}
 
 \myheader{Bagging} See Figure~\ref{fig:bagging_mar}
 \begin{figure}[H]
-	\centering{
-		\includegraphics[width=0.9\textwidth]{./images/mar/bagging.PNG}
-	}
-	\caption{Bagging.}
-	\label{fig:bagging_mar}
+    \centering{
+        \includegraphics[width=0.9\textwidth]{./images/mar/bagging.PNG}
+    }
+    \caption{Bagging.}
+    \label{fig:bagging_mar}
 \end{figure}
 
 
 \myheader{Random forest} See Figure~\ref{fig:random_forest_mar}
 \begin{figure}[H]
-	\centering{
-		\includegraphics[width=0.9\textwidth]{./images/mar/random_forest.PNG}
-	}
-	\caption{Random forests.}
-	\label{fig:random_forest_mar}
+    \centering{
+        \includegraphics[width=0.9\textwidth]{./images/mar/random_forest.PNG}
+    }
+    \caption{Random forests.}
+    \label{fig:random_forest_mar}
 \end{figure}
 
 \section{Informative projections} \index{Informative projections}
@@ -187,7 +187,7 @@ into the $k$-dimensional subspace spanned by $u_1, u_2, ..., u_k \in \mathbb{R}^
 and suppose all $u_i$ are orthonormal (each has length one, and they are perpendicular to 
 each other). Then the projection is:
 \myequ{
-	(x \cdot u_1)u_1 + (x \cdot u_2)u_2 + ... + (x \cdot u_k)u_k = UU^Tx
+    (x \cdot u_1)u_1 + (x \cdot u_2)u_2 + ... + (x \cdot u_k)u_k = UU^Tx
 }
 
 \myheader{Best single direction} Suppose we want to map our data $x_1, x_2, ..., x_n \in 
@@ -197,14 +197,14 @@ The best direction $u$ should be the one that maximize the variance after projec
 be the data matrix, where each column is a data point, and $\sum$ be the covariance matrix of $X$. 
 Suppose the mean of $X$ is $\mu \in \mathbb{R}^p$, then 
 \myequ{
-	\mathbb{E}(u^T X) & = u^T \mathbb{E}(X) = u^T \mu \\
-	var(u^T X) & = \mathbb{E}(u^T X - u^T \mu) = \mathbb{E} (u^T (X - \mu) (X - \mu)^T u)  \\	
-				& = u^T \mathbb{E}(X - \mu)(X - \mu)^T u = u^T \sum u
+    \mathbb{E}(u^T X) & = u^T \mathbb{E}(X) = u^T \mu \\
+    var(u^T X) & = \mathbb{E}(u^T X - u^T \mu) = \mathbb{E} (u^T (X - \mu) (X - \mu)^T u)  \\   
+                & = u^T \mathbb{E}(X - \mu)(X - \mu)^T u = u^T \sum u
 }
 
 \begin{remark}
-	$u^T\sum u$ is maximized by setting $u$ to the first \textbf{eigenvector} of $\sum$. The maximum
-	value is the corresponding eigenvalue.
+    $u^T\sum u$ is maximized by setting $u$ to the first \textbf{eigenvector} of $\sum$. The maximum
+    value is the corresponding eigenvalue.
 \end{remark}
 
 
@@ -216,11 +216,11 @@ $u_1, u_2, ..., u_k$.
 
 \myheader{Spectral decomposition} See Figure~\ref{fig:spec_decomp_mar}.
 \begin{figure}[H]
-	\centering{
-		\includegraphics[width=0.9\textwidth]{./images/mar/spectral_decomp.PNG}
-	}
-	\caption{Spectral decomposition.}
-	\label{fig:spec_decomp_mar}
+    \centering{
+        \includegraphics[width=0.9\textwidth]{./images/mar/spectral_decomp.PNG}
+    }
+    \caption{Spectral decomposition.}
+    \label{fig:spec_decomp_mar}
 \end{figure}
 
 \myheader{Singular value decomposition (SVD)} See Figure~\ref{fig:svd_mar}. 
@@ -234,11 +234,11 @@ $u_1, u_2, ..., u_k$.
     that all $\sigma_i$ are \textbf{non-negative}.
 
 \begin{figure}[H]
-	\centering{
-		\includegraphics[width=0.9\textwidth]{./images/mar/SVD.PNG}
-	}
-	\caption{Singular value decomposition.}
-	\label{fig:svd_mar}
+    \centering{
+        \includegraphics[width=0.9\textwidth]{./images/mar/SVD.PNG}
+    }
+    \caption{Singular value decomposition.}
+    \label{fig:svd_mar}
 \end{figure}
 
 \section{Positive definite matrix }
@@ -810,11 +810,11 @@ read:: (Read a) => String -> a
 \section{Haskell: monads}\index{Haskell: monads}
 The function programming community divides into two camps:
 \begin{enumerate}
-	\item "Pure" languages, such as Haskell, are based directly upon the 
-	mathematical notion of a function as a mapping from arguments to 
-	results.
+    \item "Pure" languages, such as Haskell, are based directly upon the 
+    mathematical notion of a function as a mapping from arguments to 
+    results.
 
-	\item "Impure" languages, such as ML, are based upon the extension of this notion with a range of possible effects, such as exceptions and assignments.
+    \item "Impure" languages, such as ML, are based upon the extension of this notion with a range of possible effects, such as exceptions and assignments.
 \end{enumerate}
 Pure languages are easier to reason about and may benefit from lazy
 evaluation, while impure languages may be more efficient 
@@ -825,17 +825,17 @@ Monads are an example of the idea of abstracting out a common
 programming pattern as a definition. 
 
 \begin{haskellcode}
-inc	       :: [Int] -> [Int]
+inc :: [Int] -> [Int]
 inc []     =  []
 inc (n:ns) =  n+1 : inc ns
 
-sqr	       :: [Int] -> [Int]
+sqr :: [Int] -> [Int]
 sqr []     =  []
 sqr (n:ns) =  n^2 : sqr ns
 
--- above functions have the same programming pattern, namely mapping the empty
--- list to itself, and a non-empty list to some function applied to each
--- element in the list
+-- above functions have the same programming pattern, 
+-- namely mapping the empty list to itself, and a non-empty 
+-- list to some function applied to each element in the list
 
 -- abstract this pattern gives us the map function
 map         :: (a -> b) -> [a] -> [b]
@@ -873,29 +873,30 @@ class Functor f where
 
 -- map is just a map that works on lists
 instance Functor [] where
-	fmap = map
+    fmap = map
 
 -- Maybe is also a functor
 instance Functor Maybe where
-	fmap f (Just x) = Just (f x)
-	fmap f Nothing = Nothing
+    fmap f (Just x) = Just (f x)
+    fmap f Nothing = Nothing
 
 -- make Tree type instance of Functor
 instance Functor Tree where
-	fmap f EmptyTree = EmptyTree
-	fmap f (Node x left right) = Node (f x) (fmap f left) (fmap f right)
+    fmap f EmptyTree = EmptyTree
+    fmap f (Node x left right) = Node (f x) 
+           (fmap f left) (fmap f right)
 
 -- IO is an instance of Functor
 instance Functor IO where
-	fmap f action = do
-		results <- action
-		return (f result)
+    fmap f action = do
+        results <- action
+        return (f result)
 
 -- <-: bind that result to a name
 result <- getLine
 
 -- return: a function that makes an I/O action that doesn't do 
--- 		   anything but only presents something as its result
+--         anything but only presents something as its result
 
 \end{haskellcode}
 
@@ -915,7 +916,7 @@ the type constructors that you can \texttt{lift2} or \texttt{lift3} over.
 liftA  :: Applicative t => (a -> b) -> t a -> t b
 
 liftA2 :: Applicative t 
-	   => (a1 -> a2 -> b) 
+       => (a1 -> a2 -> b) 
        -> t a1 
        -> t a2 
        -> t b
@@ -926,7 +927,7 @@ liftA3 :: Applicative t
        -> t a2
        -> t a3
        -> t b
-\end{haskellcode}	
+\end{haskellcode}   
 
 
 \myheader{Sequencing operator}
@@ -948,5 +949,4 @@ m1 >>= \x1 ->
     mn >>= \xn ->
       f x1 x2 ... xn
 \end{haskellcode}
-
 
