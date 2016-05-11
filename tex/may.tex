@@ -1,0 +1,11 @@
+\chapter{May}
+
+\section{Build sparse matrix with Eigen efficiently} \index{Build sparse matrix with Eigen efficiently}
+
+When I build a sparse matrix with Eigen, I come across a problem that it is quite slow. The problem is that
+when you \textit{insert} elements one by one, each time Eigen needs to reallocate space for the matrix and copy
+the data, which is reason that it can be slow. 
+
+The solution is to first record the row, column index as well as value of non-zero entries with \textit{triplets},
+and then build the sparse matrix with the function \textit{setFromTriplets}.
+
