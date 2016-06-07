@@ -11,19 +11,44 @@ and then build the sparse matrix with the function \textit{setFromTriplets}.
 
 \chapter{June}
 \section{Transform matrix and projective matrix} \index{Transform matrix and projective matrix}
-Transform a vertex from world space to camera space, we need to construct the rigid transform matrix. Given a right
+To transform a vertex from world space to camera space, we need to construct the rigid transform matrix. Given a right
 hand system, we need \textbf{eye} $\in \mathbb{R}^3$ position, \textbf{lookAt} $\in \mathbb{R}^3$ position as well as \textbf{up} $\in \mathbb{R}^3$ direction to determine the matrix.
 The matrix is in the following format:
  \myequ{
 V & =       \begin{pmatrix}
-           s.x & u.x & -f.x & 1.0 \\
-           s.y & u.y & -f.y & 1.0 \\
-           s.z & u.z & -f.z & 1.0 \\
+           s.x & u.x & -f.x & 0.0 \\
+           s.y & u.y & -f.y & 0.0 \\
+           s.z & u.z & -f.z & 0.0 \\
            - (s \cdot eye) & -(u \cdot eye) & -(f \cdot eye) & 1.0  
        \end{pmatrix} \\
   where\  & f = normalize(lookAt - eye) \\
   & s = normalize(f \times up) \\
   & u = s \times f 
 }
+
+\begin{remark}
+    Note this matrix is constructed for right-hand coordinate system.  
+\end{remark}
+
+In addition, to transform a point from camera space to image space, we need to construct the perspective projection matrix. 
+In this case, we need field of view in $x$ and $y$ axis, namely \textbf{fovX} and \textbf{fovY}, \textbf{nearClip} and \textbf{farClip}. The matrix is build as:
+ 
+ \myequ{
+     P & =       \begin{pmatrix}
+        \frac{1}{\text{tan}(\frac{fovX}{2})} & 0 & 0 & 0 \\
+        0 & \frac{1}{\text{tan}(\frac{fovY}{2})} & 0 & 0 \\
+        0 & 0 & -\frac{far + near}{far - near} 
+        &  -\frac{2 * far * near}{far - near} \\
+        0 & 0 & -1 & 0 
+ \end{pmatrix} 
+}
+
+
+
+
+
+
+
+
 
 
