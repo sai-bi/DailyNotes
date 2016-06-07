@@ -10,3 +10,20 @@ The solution is to first record the row, column index as well as value of non-ze
 and then build the sparse matrix with the function \textit{setFromTriplets}.
 
 \chapter{June}
+\section{Transform matrix and projective matrix} \index{Transform matrix and projective matrix}
+Transform a vertex from world space to camera space, we need to construct the rigid transform matrix. Given a right
+hand system, we need \textbf{eye} $\in \mathbb{R}^3$ position, \textbf{lookAt} $\in \mathbb{R}^3$ position as well as \textbf{up} $\in \mathbb{R}^3$ direction to determine the matrix.
+The matrix is in the following format:
+ \myequ{
+V & =       \begin{pmatrix}
+           s.x & u.x & -f.x & 1.0 \\
+           s.y & u.y & -f.y & 1.0 \\
+           s.z & u.z & -f.z & 1.0 \\
+           - (s \cdot eye) & -(u \cdot eye) & -(f \cdot eye) & 1.0  
+       \end{pmatrix} \\
+  where\  & f = normalize(lookAt - eye) \\
+  & s = normalize(f \times up) \\
+  & u = s \times f 
+}
+
+
